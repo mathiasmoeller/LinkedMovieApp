@@ -1,0 +1,14 @@
+{
+  "name": "LinkedMovieApp",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A small student project using LMDB to search for movies.",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install"
+    }
+}
