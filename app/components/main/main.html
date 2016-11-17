@@ -1,0 +1,30 @@
+<div ng-controller="MainCtrl as ctrl">
+  <form name="input" layout="row" layout-align="center start" layout-padding>
+    <md-chips ng-model="ctrl.searchTerms" name="searchTerms" placeholder="Search" flex="60">
+      <md-chip-template>
+        <strong>{{$chip}}</strong>
+      </md-chip-template>
+    </md-chips>
+    <md-select flex="40" ng-model="ctrl.type" placeholder="Select type">
+      <md-option>
+        <md-icon>face</md-icon>
+        Actor
+      </md-option>
+      <md-option>
+        <md-icon>movie</md-icon>
+        Movie name
+      </md-option>
+      <md-option>
+        <md-icon>videocam</md-icon>
+        Director
+      </md-option>
+      <md-option>
+        <md-icon>language</md-icon>
+        Country
+      </md-option>
+    </md-select>
+  </form>
+
+  <md-divider></md-divider>
+
+</div>
