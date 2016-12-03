@@ -1,0 +1,16 @@
+.demo-ribbon {
+    width: 100%;
+    height: calc(100% - 64px);
+    background-color: #3F51B5;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.demo-header .mdl-layout__header-row {
+    padding-left: 40px;
+}
+
+#graph {
+    height: calc(100vh - 64px);
+}
