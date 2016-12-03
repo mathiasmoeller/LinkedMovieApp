@@ -1,0 +1,70 @@
+# Get movie by label:
+PREFIX mdb: <http://data.linkedmdb.org/resource/movie/film>
+PREFIX dc: <http://purl.org/dc/terms/>
+SELECT ?label?resource WHERE {
+   ?resource mdb:id ?uri .
+   ?resource dc:title ?label .
+   FILTER regex(?label,'Shining')
+}
+
+# Get movie by id:
+PREFIX mdb: <http://data.linkedmdb.org/resource/movie/>
+SELECT ?movie WHERE {
+  ?movie mdb:filmid "2014"^^xsd:int .
+}
+
+# Get actor by id:
+
+# Get actors of movie
+
+# Get movies actor (by url) acted in
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dc: <http://purl.org/dc/terms/>
+SELECT ?movie ?movieTitle WHERE{
+  ?movie movie:actor <http://data.linkedmdb.org/resource/actor/30947> ;
+         dc:title ?movieTitle .
+}
+
+# Get movies produced by producer (by url)
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dc: <http://purl.org/dc/terms/>
+SELECT ?movie ?movieTitle WHERE{
+  ?movie movie:producer <http://data.linkedmdb.org/resource/producer/1> ;
+         dc:title ?movieTitle .
+}
+
+# Get movies directed by director (by url)
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+PREFIX dc: <http://purl.org/dc/terms/>
+SELECT ?movie ?movieTitle WHERE{
+  ?movie movie:director <http://data.linkedmdb.org/resource/director/1> ;
+         dc:title ?movieTitle .
+}
+
+
+# Get movies actors
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+SELECT ?actor WHERE{
+ <http://data.linkedmdb.org/resource/film/2014> movie:actor ?actor .
+}
+
+
+# Get movies producer
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+SELECT ?producer WHERE{
+ <http://data.linkedmdb.org/resource/film/2014> movie:producer ?producer .
+}
+
+
+# Get movies director
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+SELECT ?director WHERE{
+ <http://data.linkedmdb.org/resource/film/2014> movie:director ?director .
+}
+
+
+# Get movies date
+PREFIX movie: <http://data.linkedmdb.org/resource/movie/>
+SELECT ?date WHERE{
+ <http://data.linkedmdb.org/resource/film/2014> movie:initial_release_date ?date .
+}
