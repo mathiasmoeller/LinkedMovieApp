@@ -26,12 +26,20 @@ var options = {
   height: '100%',
   width: '100%',
   physics: {
-    maxVelocity: 25,
+    maxVelocity: 5,
+     timestep: 2,
     repulsion: {
       nodeDistance: 1000,
       springLength: 1000,
-      centralGravity: 0.05
-    }
+      centralGravity: 0.05,
+      //damping: 0.8,
+    },
+     stabilization: {
+         enabled: false,
+         iterations: 10000,
+         updateInterval: 100000,
+         onlyDynamicEdges: false,
+     },
   },
   dragNodes: false
 };
