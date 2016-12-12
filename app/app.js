@@ -55,63 +55,63 @@ function clickHandler(event) {
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'Marlon Brando',
-      image: 'http://a1.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,q_80,w_620/MTE4MDAzNDEwNDYyMjEzNjQ2.jpg'
+      image: 'dummy_images/brando.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Actor'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'Francis Ford Coppola',
-      image: 'https://www.nyfa.edu/student-resources/wp-content/uploads/2014/06/Francis-Ford-Coppola.jpg'
+      image: 'dummy_images/Francis-Ford-Coppola.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Director'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'Martin Sheen',
-      image: 'http://www.onbeing.org/sites/default/files/styles/width175/public/MARTIN-SHEEN.gif'
+      image: 'dummy_images/MARTIN-SHEEN.gif'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Actor'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'Harrison Ford',
-      image: 'http://i1076.photobucket.com/albums/w450/tincanbandit/Movie%20guns/42218-star-wars_833648f8_zpsf47a6e46.jpg'
+      image: 'dummy_images/42218-star-wars_833648f8_zpsf47a6e46.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Actor'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'Full Metal Jacket',
-      image: 'https://resizing.flixster.com/fsPpfxtGdLMbLjJvvPqFiNX7uG8=/180x270/v1.bTsxMTE2ODAyOTtqOzE3MjQ4OzIwNDg7ODAwOzEyMDA'
+      image: 'dummy_images/full_metal_jacket.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Recommendation'});
   } else if (counter == 2) {
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'The Godfather',
-      image: 'https://i.ytimg.com/vi/rt-r-w7Z2Ag/maxresdefault.jpg'
+      image: 'dummy_images/maxresdefault.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Movie'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'The Godfather Part II',
-      image: 'http://la-screenwriter.com/wp-content/uploads/2012/02/936full-the-godfather-part-ii-poster.jpg'
+      image: 'dummy_images/936full-the-godfather-part-ii-poster.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Movie'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'The Rainmaker',
-      image: 'https://resizing.flixster.com/nDSnVAINbKpCvSHmEfsbucslVqc=/206x305/v1.bTsxMTIwNDg0NDtqOzE3MjI5OzEyMDA7OTAwOzEyMDA'
+      image: 'dummy_images/rainmaker.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Movie'});
 
     nodes.add(Object.assign({
       id: ++lastNodeId,
       label: 'The Great Gatsby',
-      image: 'http://static.rogerebert.com/uploads/movie/movie_poster/the-great-gatsby-1974/large_70FxgKoE8UXDYc8IZL0b6rMvNFD.jpg'
+      image: 'dummy_images/large_70FxgKoE8UXDYc8IZL0b6rMvNFD.jpg'
     }, nodeOptions));
     edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Movie'});
   }
