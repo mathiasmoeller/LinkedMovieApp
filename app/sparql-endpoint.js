@@ -8,14 +8,24 @@ SELECT ?label?resource WHERE {
 FILTER regex(?label, "${movieName}", "i")
 }`;
 
-  return runQuery(query).then(json => {
-    return Promise.resolve(json.results.bindings[0]);
-  });
+  return runQuery(query);
+}
+
+function getActors(movieURI) {
+  let query = `PREFIX movie: <http://data.linkedmdb.org/resource/movie/> 
+SELECT ?uri ?name WHERE { 
+<${movieURI}> movie:actor ?uri .
+?uri movie:actor_name ?name .
+}`;
+
+  return runQuery(query);
 }
 
 function runQuery(query) {
   return fetch('http://data.linkedmdb.org/sparql?query=' + query + '&output=json')
     .then(response => {
       return response.json();
+    }).then(json => {
+      return Promise.resolve(json.results.bindings);
     });
 }

@@ -12,14 +12,32 @@ function search(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     let searchTerm = document.getElementById('search').value;
-    getMovie(searchTerm).then(movie => {
-      if (movie) {
-        addNode(movie.resource.value, movie.label.value, 'movie');
+    getMovie(searchTerm).then(movies => {
+      if (movies[0]) {
+        const uri = movies[0].resource.value;
+        addNode(uri, movies[0].label.value, 'movie');
+        getActors(uri).then(addActors.bind(undefined, uri));
       } else {
         showToast("No movies found for query: " + searchTerm);
       }
     });
   }
+}
+
+function addActors(sourceUri, actors) {
+  console.log(actors);
+  actors.map(actor => {
+    console.log(actor);
+    const uri = actor.uri.value;
+    const name = actor.name.value;
+    addNode(uri, name, 'actor');
+    addEdge(sourceUri, uri, 'Actor');
+  });
+
+}
+
+function addEdge(source, dest, label) {
+  edges.add({from: source, to: dest, font: fontOptions, label: label});
 }
 
 function addNode(id, name, group) {
