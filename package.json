@@ -1,0 +1,22 @@
+{
+  "name": "linkedmovieapp",
+  "version": "0.1.0",
+  "description": "A university project to create a knowledge graph based on LinkedMDB movie data",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathiasmoeller/LinkedMovieApp.git"
+  },
+  "keywords": [
+    "Semantic Web",
+    "SPARQL",
+    "LinkedMDB",
+    "DBPedia"
+  ],
+  "author": "Mathias Moeller & Lorenzo Toso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mathiasmoeller/LinkedMovieApp/issues"
+  },
+  "homepage": "https://github.com/mathiasmoeller/LinkedMovieApp#readme"
+}
