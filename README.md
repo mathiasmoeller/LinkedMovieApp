@@ -7,3 +7,7 @@ The goal was to utilize Semantic Web technologies. We decided to built an app th
 ### Technologies
 - [vue.js](http://visjs.org/)
 - [Material Design Lite](https://getmdl.io/)
+
+### How to
+As this is a university project we did not spent too much time on problems like CORS.
+To use this application you therefore have to disable web security in your browser (`--disable-web-security` in Chrome).
