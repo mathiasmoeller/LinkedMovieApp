@@ -1,30 +1,140 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="LMApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="LMApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="LMApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="LMApp" class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <title>Linked Movie Tree</title>
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-red.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components/vis/vis.css">
+  <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+  </style>
 </head>
 <body>
+<div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+  <header
+    class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Linked Movie Tree</span>
+      <div class="mdl-layout-spacer"></div>
+      <div id="loading-spinner" class="mdl-spinner mdl-js-spinner is-active" style="display:none"></div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <label id="movie-search" class="mdl-button mdl-js-button mdl-button--icon" for="search">
+          <i class="material-icons">search</i>
+        </label>
+        <span class="mdl-tooltip" for="movie-search">
+        Search movies
+        </span>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" id="search" placeholder="Search movies..."
+                 onkeypress="search(event)">
+          <label class="mdl-textfield__label" for="search">Search ...</label>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+  <!--Graph-->
+  <div class="demo-ribbon">
+    <div id="graph">
+    </div>
+  </div>
+</div>
 
+<!--Reset button-->
+<button id="reset"
+        class="reset-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+        onclick="reset()">
+  <i class="material-icons">delete</i>
+</button>
+<span class="mdl-tooltip mdl-tooltip--left" for="reset">
+    Reset
+</span>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="app.js"></script>
+<!--Zoom button-->
+<button id="zoom"
+        class="zoom-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+        onclick="fitViewport()">
+  <i class="material-icons">aspect_ratio</i>
+</button>
+<span class="mdl-tooltip mdl-tooltip--left" for="zoom">
+    Zoom out
+</span>
+
+<!--Node key button-->
+<button id="key"
+        class="key-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+        onclick="showKeyDialog()">
+  <i class="material-icons">map</i>
+</button>
+<span class="mdl-tooltip mdl-tooltip--left" for="key">
+    Show key
+</span>
+
+<!--Toasts-->
+<div id="toast" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
+</div>
+
+<!--Dialog-->
+<dialog class="key-dialog mdl-dialog">
+  <h4 class="mdl-dialog__title">Node keys</h4>
+  <div class="mdl-dialog__content">
+    <ul class="key-dialog-list">
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-movie">
+          <img class="key-node-image" src="images/movie.svg"/>
+        </div>
+        Movie
+      </li>
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-actor">
+          <img class="key-node-image" src="images/actor.svg"/>
+        </div>
+        Actor
+      </li>
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-director">
+          <img class="key-node-image" src="images/director.svg"/>
+        </div>
+        Director
+      </li>
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-selected">
+          <img class="key-node-image" src="images/actor.svg"/>
+        </div>
+        Selected
+      </li>
+    </ul>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close" onclick="hideKeyDialog()">Close</button>
+  </div>
+</dialog>
+
+<script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="components/vis/vis.js"></script>
+<script src="fetch-wrapper.js"></script>
+<script src="sparql-endpoint.js"></script>
+<script src="app.js"></script>
+<script src="visjs-config.js"></script>
 </body>
 </html>
