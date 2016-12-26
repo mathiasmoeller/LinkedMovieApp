@@ -6,7 +6,9 @@ function get(url) {
   loading = true;
   setSpinner(true);
   connectionCounter++;
-  return fetch(url).then(response => {
+
+  return fetchJsonp(url)
+    .then(response => {
     connectionCounter--;
     loading = connectionCounter !== 0;
     setSpinner(loading);
