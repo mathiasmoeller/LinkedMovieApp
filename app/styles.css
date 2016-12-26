@@ -30,3 +30,49 @@
     bottom: 106px;
     right: 30px;
 }
+
+.key-button {
+    position: fixed;
+    bottom: 182px;
+    right: 30px;
+}
+
+.key-dialog-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 18px;
+}
+
+.key-dialog-list-item {
+    background-color: rgb(0, 150, 136);
+    margin: 4px 0;
+    color: white;
+}
+
+.key-node {
+    height: 50px;
+    width: 50px;
+    border: 2px solid yellow;
+    background-color: #97c2fc;
+    border-radius: 100%;
+    display: inline-block;
+    margin: 8px 8px;
+}
+
+.key-node-actor {
+    border: 2px solid white;
+}
+
+.key-node-director {
+    border: 2px solid blue;
+}
+
+.key-node-movie {
+    border: 2px solid yellow;
+}
+
+.key-node-image {
+    height: 46px;
+    width: 46px;
+    margin: 2px 2px;
+}

@@ -1,33 +1,54 @@
+const mdbPrefix = 'PREFIX mdb: <http://data.linkedmdb.org/resource/movie/>';
+const filmPrefix = 'PREFIX film: <http://data.linkedmdb.org/resource/movie/film>';;;;;;;;;;;;;;;
+const dcPrefix = 'PREFIX dc: <http://purl.org/dc/terms/> ';
+
 function getMovie(movieName) {
-  // if this looks super ugly its your IDE's fault
-  let query = `PREFIX mdb: <http://data.linkedmdb.org/resource/movie/film> 
-PREFIX dc: <http://purl.org/dc/terms/> 
-SELECT ?label?resource WHERE { 
-?resource mdb:id ?uri . 
-?resource dc:title ?label . 
-FILTER regex(?label, "${movieName}", "i")
-}`;
+  let query = `${filmPrefix} ${dcPrefix} 
+    SELECT ?label ?resource WHERE { 
+    ?resource film:id ?uri . 
+    ?resource dc:title ?label . 
+    FILTER regex(?label, "${movieName}", "i")
+    }`;
 
   return runQuery(query);
 }
 
-function getActors(movieURI) {
-  let query = `PREFIX movie: <http://data.linkedmdb.org/resource/movie/> 
-SELECT ?uri ?name WHERE { 
-<${movieURI}> movie:actor ?uri .
-?uri movie:actor_name ?name .
-}`;
+function getMoviesActors(movieURI) {
+  let query = `${mdbPrefix} 
+    SELECT ?uri ?name WHERE { 
+    <${movieURI}> mdb:actor ?uri .
+    ?uri mdb:actor_name ?name .
+    }`;
 
   return runQuery(query);
 }
 
 function getActorsMovies(actorURI) {
-  let query = `PREFIX movie: <http://data.linkedmdb.org/resource/movie/> 
-PREFIX dc: <http://purl.org/dc/terms/> 
-SELECT ?uri ?title WHERE { 
-?uri movie:actor <${actorURI}> ; 
-dc:title ?title . 
-}`;
+  let query = `${mdbPrefix} ${dcPrefix}  
+    SELECT ?uri ?title WHERE { 
+    ?uri mdb:actor <${actorURI}> ; 
+    dc:title ?title . 
+    }`;
+
+  return runQuery(query);
+}
+
+function getMoviesDirector(movieURI) {
+  let query = `${mdbPrefix} 
+    SELECT ?uri ?name WHERE { 
+    <${movieURI}> mdb:director ?uri .
+    ?uri mdb:director_name ?name .
+    }`;
+
+  return runQuery(query);
+}
+
+function getDirectorsMovies(directorURI) {
+  let query = `${mdbPrefix} ${dcPrefix} 
+    SELECT ?uri ?title WHERE{
+    ?uri mdb:director <${directorURI}> ;
+    dc:title ?title .
+    }`;
 
   return runQuery(query);
 }

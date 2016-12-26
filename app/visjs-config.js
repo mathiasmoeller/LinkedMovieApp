@@ -1,4 +1,3 @@
-const defaultImage = 'http://www.freeiconspng.com/uploads/movie-icon-2.png';
 let network = null;
 
 let nodeOptions = {
@@ -8,8 +7,7 @@ let nodeOptions = {
   },
   shape: 'circularImage',
   borderWidth: 2,
-  borderWidthSelected: 4,
-  brokenImage: defaultImage
+  borderWidthSelected: 4
 };
 
 const fontOptions = {
@@ -52,17 +50,20 @@ let options = {
     movie: {
       color: {
         border: 'yellow'
-      }
+      },
+      image: 'images/movie.svg'
     },
     actor: {
       color: {
         border: 'white'
-      }
+      },
+      image: 'images/actor.svg'
     },
     director: {
       color: {
         border: 'blue'
-      }
+      },
+      image: 'images/director.svg'
     }
   }
 };

@@ -78,11 +78,51 @@
     Zoom out
 </span>
 
+<!--Node key button-->
+<button id="key"
+        class="key-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+        onclick="showKeyDialog()">
+  <i class="material-icons">map</i>
+</button>
+<span class="mdl-tooltip mdl-tooltip--left" for="key">
+    Show key
+</span>
+
 <!--Toasts-->
 <div id="toast" class="mdl-js-snackbar mdl-snackbar">
   <div class="mdl-snackbar__text"></div>
   <button class="mdl-snackbar__action" type="button"></button>
 </div>
+
+<!--Dialog-->
+<dialog class="key-dialog mdl-dialog">
+  <h4 class="mdl-dialog__title">Node keys</h4>
+  <div class="mdl-dialog__content">
+    <ul class="key-dialog-list">
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-movie">
+          <img class="key-node-image" src="images/movie.svg"/>
+        </div>
+        Movie
+      </li>
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-actor">
+          <img class="key-node-image" src="images/actor.svg"/>
+        </div>
+        Actor
+      </li>
+      <li class="key-dialog-list-item">
+        <div class="key-node key-node-director">
+          <img class="key-node-image" src="images/director.svg"/>
+        </div>
+        Director
+      </li>
+    </ul>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close" onclick="hideKeyDialog()">Close</button>
+  </div>
+</dialog>
 
 <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <script src="components/vis/vis.js"></script>
