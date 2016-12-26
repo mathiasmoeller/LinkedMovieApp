@@ -7,12 +7,17 @@ function clickHandler(event) {
       expandActor(nodeID);
       break;
     case 'movie':
+      expandMovie(nodeID);
       break;
     case 'director':
+      // TODO
       break;
     default:
       break;
   }
+
+  //TODO: how can we utilize stabilize?
+  // network.stabilize(2000);
 }
 
 function search(event) {
@@ -24,7 +29,7 @@ function search(event) {
       if (movies[0]) {
         const uri = movies[0].resource.value;
         addNode(uri, movies[0].label.value, 'movie');
-        getActors(uri).then(addActors.bind(undefined, uri));
+        expandMovie(uri);
       } else {
         showToast("No movies found for query: " + searchTerm);
       }
@@ -39,6 +44,7 @@ function addActors(sourceUri, actors) {
     addNode(uri, name, 'actor');
     addEdge(sourceUri, uri, 'Actor');
   });
+
 
 }
 
@@ -92,4 +98,9 @@ function expandActor(actorURI) {
       addEdge(actorURI, movieURI, 'Actor');
     });
   });
+}
+
+function expandMovie(movieURI) {
+  getActors(movieURI).then(addActors.bind(undefined, movieURI));
+  // TODO: get similiar movie
 }
