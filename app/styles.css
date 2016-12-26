@@ -14,3 +14,13 @@
 #graph {
     height: calc(100vh - 64px);
 }
+
+#loading-spinner {
+    margin-right: 8px;
+}
+
+.reset-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}

@@ -1,10 +1,18 @@
 function clickHandler(event) {
-  // nodes.add(Object.assign({
-  //   id: ++lastNodeId,
-  //   label: 'Marlon Brando',
-  //   image: 'dummy_images/brando.jpg'
-  // }, nodeOptions));
-  // edges.add({from: event.nodes[0], to: lastNodeId, font: fontOptions, label: 'Actor'});
+  let nodeID = event.nodes[0];
+  let node = nodes.get(nodeID);
+
+  switch (node.group) {
+    case 'actor':
+      expandActor(nodeID);
+      break;
+    case 'movie':
+      break;
+    case 'director':
+      break;
+    default:
+      break;
+  }
 }
 
 function search(event) {
@@ -25,9 +33,7 @@ function search(event) {
 }
 
 function addActors(sourceUri, actors) {
-  console.log(actors);
   actors.map(actor => {
-    console.log(actor);
     const uri = actor.uri.value;
     const name = actor.name.value;
     addNode(uri, name, 'actor');
@@ -37,22 +43,28 @@ function addActors(sourceUri, actors) {
 }
 
 function addEdge(source, dest, label) {
-  edges.add({from: source, to: dest, font: fontOptions, label: label});
+  // we assign the source and dest id of the nodes as edge id to create a unique edge identifier.
+  // when we check we need to check both combinations as the edges are not directed
+  if (!edges.get(source + dest) && !edges.get(dest + source)) {
+    edges.add({id: source + dest, from: source, to: dest, font: fontOptions, label: label});
+  }
 }
 
 function addNode(id, name, group) {
-  let node = Object.assign({
-    id: id,
-    label: name,
-    group: group,
-    image: defaultImage
-  }, nodeOptions);
-  nodes.add(node);
-  findImage(nodes, node.id, node.label);
+  if (!nodes.get(id)) {
+    let node = Object.assign({
+      id: id,
+      label: name,
+      group: group,
+      image: defaultImage
+    }, nodeOptions);
+    nodes.add(node);
+    findImage(nodes, node.id, node.label);
+  }
 }
 
 function findImage(nodes, nodeID, query) {
-  fetch('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=100&titles=' + query)
+  get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=100&titles=' + query)
     .then(function(response) {
       response.json().then(data => {
         try {
@@ -69,4 +81,15 @@ function findImage(nodes, nodeID, query) {
 function showToast(message) {
   let snackbarContainer = document.querySelector('#toast');
   snackbarContainer.MaterialSnackbar.showSnackbar({message: message});
+}
+
+function expandActor(actorURI) {
+  getActorsMovies(actorURI).then(movies => {
+    movies.map(movie => {
+      const movieURI = movie.uri.value;
+      const title = movie.title.value;
+      addNode(movieURI, title, 'movie');
+      addEdge(actorURI, movieURI, 'Actor');
+    });
+  });
 }

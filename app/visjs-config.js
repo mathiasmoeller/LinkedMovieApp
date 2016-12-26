@@ -55,12 +55,27 @@ let options = {
 // create a network
 let container = document.getElementById('graph');
 
-// provide the data in the vis format
-let data = {
-  nodes: nodes,
-  edges: edges
-};
+function initialize(nodes, edges) {
+  // provide the data in the vis format
+  let data = {
+    nodes: nodes,
+    edges: edges
+  };
+  let network = new vis.Network(container, data, options);
+  network.on('click', clickHandler);
+}
 
-// initialize your network!
-let network = new vis.Network(container, data, options);
-network.on('click', clickHandler);
+function reset() {
+  document.getElementById('search').value = '';
+
+  // create an array with nodes
+  nodes = new vis.DataSet([]);
+
+// create an array with edges
+  edges = new vis.DataSet([]);
+
+  initialize(nodes, edges);
+}
+
+
+initialize(nodes, edges);

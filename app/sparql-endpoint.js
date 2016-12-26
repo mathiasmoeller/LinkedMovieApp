@@ -21,8 +21,19 @@ SELECT ?uri ?name WHERE {
   return runQuery(query);
 }
 
+function getActorsMovies(actorURI) {
+  let query = `PREFIX movie: <http://data.linkedmdb.org/resource/movie/> 
+PREFIX dc: <http://purl.org/dc/terms/> 
+SELECT ?uri ?title WHERE { 
+?uri movie:actor <${actorURI}> ; 
+dc:title ?title . 
+}`;
+
+  return runQuery(query);
+}
+
 function runQuery(query) {
-  return fetch('http://data.linkedmdb.org/sparql?query=' + query + '&output=json')
+  return get('http://data.linkedmdb.org/sparql?query=' + query + '&output=json')
     .then(response => {
       return response.json();
     }).then(json => {

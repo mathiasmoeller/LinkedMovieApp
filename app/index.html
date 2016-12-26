@@ -34,10 +34,14 @@
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">Linked Movie Tree</span>
       <div class="mdl-layout-spacer"></div>
+      <div id="loading-spinner" class="mdl-spinner mdl-js-spinner is-active" style="display:none"></div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+        <label id="movie-search" class="mdl-button mdl-js-button mdl-button--icon" for="search">
           <i class="material-icons">search</i>
         </label>
+        <span class="mdl-tooltip" for="movie-search">
+        Search movies
+        </span>
         <div class="mdl-textfield__expandable-holder">
           <input class="mdl-textfield__input" type="text" id="search" placeholder="Search movies..."
                  onkeypress="search(event)">
@@ -46,11 +50,23 @@
       </div>
     </div>
   </header>
+
+  <!--Graph-->
   <div class="demo-ribbon">
     <div id="graph">
     </div>
   </div>
 </div>
+
+<!--Reset button-->
+<button id="reset"
+        class="reset-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
+        onclick="reset()">
+  <i class="material-icons">delete</i>
+</button>
+<span class="mdl-tooltip mdl-tooltip--top" for="reset">
+    Reset
+</span>
 
 <!--Toasts-->
 <div id="toast" class="mdl-js-snackbar mdl-snackbar">
@@ -60,6 +76,7 @@
 
 <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 <script src="components/vis/vis.js"></script>
+<script src="fetch-wrapper.js"></script>
 <script src="sparql-endpoint.js"></script>
 <script src="app.js"></script>
 <script src="visjs-config.js"></script>
