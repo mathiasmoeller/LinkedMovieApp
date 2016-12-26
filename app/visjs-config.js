@@ -3,9 +3,12 @@ let network = null;
 
 let nodeOptions = {
   font: '12px Roboto white',
-  color: 'white',
+  color: {
+    highlight: 'red'
+  },
   shape: 'circularImage',
   borderWidth: 2,
+  borderWidthSelected: 4,
   brokenImage: defaultImage
 };
 
@@ -46,10 +49,21 @@ let options = {
     dragNodes: false
   },
   groups: {
-    // TODO: this could be used for styling the groups (specific style overrides group styles)
-    movie: {},
-    actor: {},
-    director: {}
+    movie: {
+      color: {
+        border: 'yellow'
+      }
+    },
+    actor: {
+      color: {
+        border: 'white'
+      }
+    },
+    director: {
+      color: {
+        border: 'blue'
+      }
+    }
   }
 };
 
