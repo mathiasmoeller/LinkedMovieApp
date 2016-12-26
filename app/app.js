@@ -2,6 +2,8 @@ function clickHandler(event) {
   let nodeID = event.nodes[0];
   let node = nodes.get(nodeID);
 
+  // TODO: on second click on node remove all connected edges and all nodes that are only connected to these edges
+
   switch (node.group) {
     case 'actor':
       expandActor(nodeID);
@@ -70,7 +72,8 @@ function addNode(id, name, group) {
 }
 
 function findImage(nodes, nodeID, query) {
-  get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=100&titles=' + query)
+  // TODO: what is the optimal image size (pithumbsize)?
+  get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=50&titles=' + query)
     .then(function(response) {
       response.json().then(data => {
         try {

@@ -83,5 +83,6 @@ function reset() {
   initialize(nodes, edges);
 }
 
-
-initialize(nodes, edges);
+window.onload = function() {
+  initialize(nodes, edges);
+};
