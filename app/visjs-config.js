@@ -1,4 +1,5 @@
 const defaultImage = 'http://www.freeiconspng.com/uploads/movie-icon-2.png';
+let network = null;
 
 let nodeOptions = {
   font: '12px Roboto white',
@@ -61,11 +62,16 @@ function initialize(nodes, edges) {
     nodes: nodes,
     edges: edges
   };
-  let network = new vis.Network(container, data, options);
+  network = new vis.Network(container, data, options);
   network.on('click', clickHandler);
 }
 
+function fitViewport(nodes) {
+  network.fit(nodes);
+}
+
 function reset() {
+  network.destroy();
   document.getElementById('search').value = '';
 
   // create an array with nodes

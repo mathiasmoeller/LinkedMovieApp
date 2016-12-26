@@ -1,7 +1,7 @@
 .demo-ribbon {
     width: 100%;
     height: calc(100% - 64px);
-    background-color: #3F51B5;
+    background-color: rgb(0, 150, 136);
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
@@ -22,5 +22,11 @@
 .reset-button {
     position: fixed;
     bottom: 30px;
+    right: 30px;
+}
+
+.zoom-button {
+    position: fixed;
+    bottom: 106px;
     right: 30px;
 }
