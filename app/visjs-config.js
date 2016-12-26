@@ -51,19 +51,19 @@ let options = {
       color: {
         border: 'yellow'
       },
-      image: 'images/movie.svg'
+      image: 'app/images/movie.svg'
     },
     actor: {
       color: {
         border: 'white'
       },
-      image: 'images/actor.svg'
+      image: 'app/images/actor.svg'
     },
     director: {
       color: {
         border: 'blue'
       },
-      image: 'images/director.svg'
+      image: 'app/images/director.svg'
     }
   }
 };
