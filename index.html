@@ -28,9 +28,9 @@
   </style>
 </head>
 <body>
-<div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+<div class="mdl-layout mdl-layout--fixed-header mdl-js-layout">
   <header
-    class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+    class="mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">Linked Movie Tree</span>
       <div class="mdl-layout-spacer"></div>
@@ -50,9 +50,32 @@
       </div>
     </div>
   </header>
+  <div class="mdl-layout__drawer">
+    <img class="menu-image" src="app/favicon.png">
+    <span class="menu-text menu-divider">Linked Movie Tree is a university project for the lecture Semantic Web & Linked Data. <br>
+      The goal was to utilize Semantic Web technologies. We decided to build an app that allows you to create a tree similar to the <a
+        target="_blank" href="https://www.google.com/intl/bn/insidesearch/features/search/knowledge.html">Google Knowledge Graph
+      </a> based on the movie data on <a
+        target="_blank" href="http://www.linkedmdb.org/">LinkedMDB</a>.
+    </span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link">
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="imageSwitch">
+          <input type="checkbox" id="imageSwitch" class="mdl-switch__input" checked>
+          <span class="mdl-switch__label">Toggle images</span>
+        </label>
+      </a>
+      <span class="menu-text menu-divider">Disabling images in nodes can strongly increase the performance for bigger graphs.</span>
+      <a class="mdl-navigation__link" target="_blank"
+         href="https://github.com/mathiasmoeller/LinkedMovieApp">
+        <img class="menu-icon" src="app/images/github.png"/>
+        View Project on GitHub
+      </a>
+    </nav>
+  </div>
 
   <!--Graph-->
-  <div class="demo-ribbon">
+  <div class="ribbon">
     <div id="graph">
     </div>
   </div>
