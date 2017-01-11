@@ -31,10 +31,12 @@ function search(event) {
     event.preventDefault();
     let searchTerm = document.getElementById('search').value;
     getMovie(searchTerm).then(movies => {
-      if (movies[0]) {
-        const uri = movies[0].resource.value;
-        addNode(uri, movies[0].label.value, 'movie');
-        expandMovie(uri);
+      if (movies.length > 0) {
+        movies.map(movie => {
+          const uri = movie.resource.value;
+          addNode(uri, movie.label.value, 'movie');
+          expandMovie(uri);
+        });
       } else {
         showToast("No movies found for query: " + searchTerm);
       }

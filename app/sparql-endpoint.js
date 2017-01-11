@@ -67,7 +67,7 @@ function parseQuery(queryObject) {
 function runQuery(queryObject) {
   let query = parseQuery(queryObject);
 
-  return get('http://data.linkedmdb.org/sparql?query=' + query + '&output=json')
+  return get(`http://data.linkedmdb.org/sparql?query=${query}&output=json`)
     .then(response => {
       return response.json();
     }).then(json => {
