@@ -13,6 +13,7 @@ function clickHandler(event) {
     case 'movie':
       expandMovie(nodeID);
       break;
+
     case 'director':
       expandDirector(nodeID);
       break;
@@ -30,10 +31,12 @@ function search(event) {
     event.preventDefault();
     let searchTerm = document.getElementById('search').value;
     getMovie(searchTerm).then(movies => {
-      if (movies[0]) {
-        const uri = movies[0].resource.value;
-        addNode(uri, movies[0].label.value, 'movie');
-        expandMovie(uri);
+      if (movies.length > 0) {
+        movies.map(movie => {
+          const uri = movie.resource.value;
+          addNode(uri, movie.label.value, 'movie');
+          expandMovie(uri);
+        });
       } else {
         showToast("No movies found for query: " + searchTerm);
       }
@@ -86,20 +89,26 @@ function addNode(id, name, group) {
   }
 }
 
+function useImages() {
+  return document.getElementById('imageSwitch').checked;
+}
+
 function findImage(nodes, nodeID, query) {
-  // TODO: what is the optimal image size (pithumbsize)?
-  get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=50&titles=' + query)
-    .then(function(response) {
-      response.json().then(data => {
-        try {
-          let pages = data.query.pages;
-          let url = pages[Object.keys(pages)].thumbnail.source;
-          nodes.update({id: nodeID, image: url});
-        } catch (e) {
-          console.log(e, data);
-        }
+  if (useImages()) {
+    // TODO: what is the optimal image size (pithumbsize)?
+    get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=50&titles=' + query)
+      .then(function(response) {
+        response.json().then(data => {
+          try {
+            let pages = data.query.pages;
+            let url = pages[Object.keys(pages)].thumbnail.source;
+            nodes.update({id: nodeID, image: url});
+          } catch (e) {
+            console.log(e, data);
+          }
+        })
       })
-    })
+  }
 }
 
 function showToast(message) {
@@ -143,8 +152,15 @@ function initialize() {
     dialogPolyfill.registerDialog(dialog);
   }
 
+  document.getElementById('imageSwitch').addEventListener('change', resetImages);
 }
 
-window.onload = function() {
-  initialize();
-};
+function resetImages(event) {
+  if (event.srcElement.checked) {
+    addImages();
+  } else {
+    removeImages();
+  }
+}
+
+initialize();

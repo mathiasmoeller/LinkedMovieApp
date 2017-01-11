@@ -1,4 +1,9 @@
 let network = null;
+const groupImages = {
+  actor: 'app/images/actor.svg',
+  director: 'app/images/director.svg',
+  movie: 'app/images/movie.svg'
+};
 
 let nodeOptions = {
   font: '12px Roboto white',
@@ -30,6 +35,7 @@ let options = {
   physics: {
     maxVelocity: 5,
     timestep: 2,
+    adaptiveTimestep: true,
     repulsion: {
       nodeDistance: 1000,
       springLength: 1000,
@@ -37,7 +43,7 @@ let options = {
       //damping: 0.8,
     },
     stabilization: {
-      enabled: false,
+      enabled: true,
       iterations: 10000,
       updateInterval: 100000,
       onlyDynamicEdges: false
@@ -46,24 +52,27 @@ let options = {
   interaction: {
     dragNodes: false
   },
+  layout: {
+    improvedLayout: true
+  },
   groups: {
     movie: {
       color: {
         border: 'yellow'
       },
-      image: 'app/images/movie.svg'
+      image: groupImages.movie
     },
     actor: {
       color: {
         border: 'white'
       },
-      image: 'app/images/actor.svg'
+      image: groupImages.actor
     },
     director: {
       color: {
         border: 'blue'
       },
-      image: 'app/images/director.svg'
+      image: groupImages.director
     }
   }
 };
@@ -79,6 +88,18 @@ function initialize(nodes, edges) {
   };
   network = new vis.Network(container, data, options);
   network.on('click', clickHandler);
+}
+
+function removeImages() {
+  nodes.get().map(node => {
+    nodes.update({id: node.id, image: groupImages[node.group]});
+  });
+}
+
+function addImages() {
+  nodes.get().map(node => {
+    findImage(nodes, node.id, node.label);
+  })
 }
 
 function fitViewport(nodes) {
