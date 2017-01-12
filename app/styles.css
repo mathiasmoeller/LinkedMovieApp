@@ -10,6 +10,16 @@
     }
 }
 
+.title:before {
+    content: 'Linked Movie App';
+}
+
+@media screen and (max-width: 700px) {
+    .title:before {
+        content: 'LMA';
+    }
+}
+
 .ribbon {
     width: 100%;
     background-color: rgb(0, 150, 136);
