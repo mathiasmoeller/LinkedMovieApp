@@ -18,6 +18,10 @@
     .title:before {
         content: 'LMA';
     }
+
+    .query-input {
+        max-width: 150px;
+    }
 }
 
 .ribbon {
