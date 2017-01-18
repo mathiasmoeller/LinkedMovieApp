@@ -13,7 +13,6 @@ function clickHandler(event) {
     case 'movie':
       expandMovie(nodeID);
       break;
-
     case 'director':
       expandDirector(nodeID);
       break;
@@ -130,7 +129,14 @@ function expandActor(actorURI) {
 function expandMovie(movieURI) {
   getMoviesActors(movieURI).then(addActors.bind(undefined, movieURI));
   getMoviesDirector(movieURI).then(addDirector.bind(undefined, movieURI));
-  // TODO: get similiar movie
+  // This does not really work....
+  // getDBPediaURI(movieURI).then(function(result) {
+  //   if (result[0]) {
+  //     getSimilarMovies(result[0].sameAs.value).then(function(data) {
+  //       console.log(data);
+  //     });
+  //   }
+  // })
 }
 
 function expandDirector(directorURI) {
@@ -156,7 +162,7 @@ function initialize() {
 }
 
 function resetImages(event) {
-  if (event.srcElement.checked) {
+  if (event.target.checked) {
     addImages();
   } else {
     removeImages();
