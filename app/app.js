@@ -53,6 +53,10 @@ function addActors(sourceURI, actors) {
 }
 
 function addDirector(sourceURI, director) {
+  if (!director[0]) {
+    return;
+  }
+
   const uri = director[0].uri.value;
   const name = director[0].name.value;
   addNode(uri, name, 'director');
@@ -68,11 +72,35 @@ function addMovies(sourceURI, movies) {
   })
 }
 
+function addPrequelAndSequel(sourceURI, movie) {
+  if (!movie[0]) {
+    return;
+  }
+
+  const prequelUri = movie[0].prequel.value;
+  const prequelName = movie[0].prequelTitle.value;
+  addNode(prequelUri, prequelName, 'movie');
+  addEdge(sourceURI, prequelUri, 'Prequel/Sequel');
+
+  const sequelUri = movie[0].sequel.value;
+  const sequelName = movie[0].sequelTitle.value;
+  addNode(sequelUri, sequelName, 'movie');
+  addEdge(sourceURI, sequelUri, 'Prequel/Sequel');
+}
+
 function addEdge(source, dest, label) {
   // we assign the source and dest id of the nodes as edge id to create a unique edge identifier.
   // when we check we need to check both combinations as the edges are not directed
   if (!edges.get(source + dest) && !edges.get(dest + source)) {
-    edges.add({id: source + dest, from: source, to: dest, font: fontOptions, label: label, color: 'white'});
+    edges.add({
+      id: source + dest,
+      from: source,
+      to: dest,
+      font: fontOptions,
+      label: label,
+      color: 'white',
+      labelBackup: label
+    });
   }
 }
 
@@ -129,6 +157,8 @@ function expandActor(actorURI) {
 function expandMovie(movieURI) {
   getMoviesActors(movieURI).then(addActors.bind(undefined, movieURI));
   getMoviesDirector(movieURI).then(addDirector.bind(undefined, movieURI));
+  getPrequelAndSequel(movieURI).then(addPrequelAndSequel.bind(undefined, movieURI));
+  // getSequel(movieURI).then(addSequel.bind(undefined, movieURI));
   // This does not really work....
   // getDBPediaURI(movieURI).then(function(result) {
   //   if (result[0]) {
@@ -159,6 +189,15 @@ function initialize() {
   }
 
   document.getElementById('imageSwitch').addEventListener('change', resetImages);
+  document.getElementById('labelSwitch').addEventListener('change', resetLabels);
+}
+
+function resetLabels(event) {
+  if (event.target.checked) {
+    addLabels();
+  } else {
+    removeLabel();
+  }
 }
 
 function resetImages(event) {

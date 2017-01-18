@@ -44,7 +44,7 @@
         Search movies
         </span>
         <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" id="search" placeholder="Search movies..."
+          <input class="mdl-textfield__input query-input" type="text" id="search" placeholder="Search movies..."
                  onkeypress="search(event)">
           <label class="mdl-textfield__label" for="search">Search ...</label>
         </div>
@@ -67,6 +67,12 @@
         </label>
       </a>
       <span class="menu-text menu-divider">Disabling images in nodes can strongly increase the performance for bigger graphs.</span>
+      <a class="mdl-navigation__link">
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="labelSwitch">
+          <input type="checkbox" id="labelSwitch" class="mdl-switch__input" checked>
+          <span class="mdl-switch__label">Toggle labels</span>
+        </label>
+      </a>
       <!--<a class="mdl-navigation__link" target="_blank"-->
       <!--href="https://github.com/mathiasmoeller/LinkedMovieApp">-->
       <!--<img class="menu-icon" src="app/images/github.png"/>-->
