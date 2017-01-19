@@ -96,6 +96,18 @@ function removeImages() {
   });
 }
 
+function removeLabel() {
+  edges.get().map(edge => {
+    edges.update({id: edge.id, label: ''})
+  });
+}
+
+function addLabels() {
+  edges.get().map(edge => {
+    edges.update({id: edge.id, label: edge.labelBackup})
+  });
+}
+
 function addImages() {
   nodes.get().map(node => {
     findImage(nodes, node.id, node.label);
