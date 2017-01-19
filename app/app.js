@@ -97,7 +97,7 @@ function addEdge(source, dest, label) {
       from: source,
       to: dest,
       font: fontOptions,
-      label: label,
+      label: useLabels() ? label : '',
       color: 'white',
       labelBackup: label
     });
@@ -118,6 +118,10 @@ function addNode(id, name, group) {
 
 function useImages() {
   return document.getElementById('imageSwitch').checked;
+}
+
+function useLabels() {
+  return document.getElementById('labelSwitch').checked;
 }
 
 function findImage(nodes, nodeID, query) {
