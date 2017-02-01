@@ -36,6 +36,7 @@ let options = {
     maxVelocity: 5,
     timestep: 2,
     adaptiveTimestep: true,
+    // useWorker: true,
     repulsion: {
       nodeDistance: 1000,
       springLength: 1000,

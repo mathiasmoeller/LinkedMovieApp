@@ -113,6 +113,9 @@ function runQuery(queryObject) {
   return get(`http://data.linkedmdb.org/sparql?query=${query}&output=json`)
     .then(response => {
       return response.json();
+    }, error => {
+      console.log(error);
+      showToast('LinkedMDB is currently not available');
     }).then(json => {
       return Promise.resolve(json.results.bindings);
     });

@@ -37,7 +37,7 @@ function search(event) {
           expandMovie(uri);
         });
       } else {
-        showToast("No movies found for query: " + searchTerm);
+        showToast('No movies found for query: ' + searchTerm);
       }
     });
   }
