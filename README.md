@@ -7,3 +7,7 @@ The goal was to utilize Semantic Web technologies. We decided to built an app th
 ### Technologies
 - [vue.js](http://visjs.org/)
 - [Material Design Lite](https://getmdl.io/)
+
+### Temporal fixes
+As long as LinkedMDB is down we query a local blazegraph endpoint. You have to set up the endpoint using the [LinkedMDB Dump](http://www.cs.toronto.edu/~oktie/linkedmdb/). As blazegraph does not support CORS or JsonP you have to start your browser without websecurites (`google-chrome --disable-web-security --user-data-dir=/someDir/`).
+When LinkedMDB is back replace the query call in `sparql-endpoint.js` with the jsonP call.
