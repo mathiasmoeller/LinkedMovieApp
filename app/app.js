@@ -4,8 +4,6 @@ function clickHandler(event) {
   let nodeID = event.nodes[0];
   let node = nodes.get(nodeID);
 
-  // TODO: on second click on node remove all connected edges and all nodes that are only connected to these edges
-
   switch (node.group) {
     case 'actor':
       expandActor(nodeID);
@@ -19,9 +17,6 @@ function clickHandler(event) {
     default:
       break;
   }
-
-  //TODO: how can we utilize stabilize?
-  // network.stabilize(2000);
 }
 
 function search(event) {
@@ -37,7 +32,7 @@ function search(event) {
           expandMovie(uri);
         });
       } else {
-        showToast("No movies found for query: " + searchTerm);
+        showToast('No movies found for query: ' + searchTerm);
       }
     });
   }
@@ -126,8 +121,7 @@ function useLabels() {
 
 function findImage(nodes, nodeID, query) {
   if (useImages()) {
-    // TODO: what is the optimal image size (pithumbsize)?
-    get('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=50&titles=' + query)
+    getJsonP('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=50&titles=' + query)
       .then(function(response) {
         response.json().then(data => {
           try {
@@ -162,15 +156,6 @@ function expandMovie(movieURI) {
   getMoviesActors(movieURI).then(addActors.bind(undefined, movieURI));
   getMoviesDirector(movieURI).then(addDirector.bind(undefined, movieURI));
   getPrequelAndSequel(movieURI).then(addPrequelAndSequel.bind(undefined, movieURI));
-  // getSequel(movieURI).then(addSequel.bind(undefined, movieURI));
-  // This does not really work....
-  // getDBPediaURI(movieURI).then(function(result) {
-  //   if (result[0]) {
-  //     getSimilarMovies(result[0].sameAs.value).then(function(data) {
-  //       console.log(data);
-  //     });
-  //   }
-  // })
 }
 
 function expandDirector(directorURI) {

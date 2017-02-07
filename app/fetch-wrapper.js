@@ -1,7 +1,7 @@
 let connectionCounter = 0;
 let loading = false;
 
-function get(url) {
+function getJsonP(url) {
 
   loading = true;
   setSpinner(true);
@@ -9,16 +9,35 @@ function get(url) {
 
   return fetchJsonp(url)
     .then(response => {
-    connectionCounter--;
-    loading = connectionCounter !== 0;
-    setSpinner(loading);
-    return Promise.resolve(response);
-  }, response => {
-    connectionCounter--;
-    loading = connectionCounter !== 0;
-    setSpinner(loading);
-    return Promise.reject(response);
-  });
+      connectionCounter--;
+      loading = connectionCounter !== 0;
+      setSpinner(loading);
+      return Promise.resolve(response);
+    }, response => {
+      connectionCounter--;
+      loading = connectionCounter !== 0;
+      setSpinner(loading);
+      return Promise.reject(response);
+    });
+}
+
+function get(url) {
+  loading = true;
+  setSpinner(true);
+  connectionCounter++;
+
+  return fetch(url)
+    .then(response => {
+      connectionCounter--;
+      loading = connectionCounter !== 0;
+      setSpinner(loading);
+      return Promise.resolve(response);
+    }, response => {
+      connectionCounter--;
+      loading = connectionCounter !== 0;
+      setSpinner(loading);
+      return Promise.reject(response);
+    });
 }
 
 function setSpinner(show) {
