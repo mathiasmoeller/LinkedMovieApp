@@ -78,9 +78,7 @@ function parseQuery(queryObject) {
 function runQuery(queryObject) {
   let query = parseQuery(queryObject);
 
-  // FIXME: when LMDB is back online replace this
-  // return getJsonP(`http://data.linkedmdb.org/sparql?query=${query}&output=json`)
-  return get(`http://localhost:9999/blazegraph/namespace/default/sparql?query=${query}&format=json`)
+  return getJsonP(`http://data.linkedmdb.org/sparql?query=${query}&output=json`)
     .then(response => {
       return response.json();
     }, error => {
