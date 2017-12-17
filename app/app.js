@@ -126,7 +126,7 @@ function findImage(nodes, nodeID, query) {
         response.json().then(data => {
           try {
             let pages = data.query.pages;
-            let url = pages[Object.keys(pages)].thumbnail.source;
+            let url = pages[Object.keys(pages)[0]].thumbnail.source;
             nodes.update({id: nodeID, image: url});
           } catch (e) {
             console.log(e, data);
